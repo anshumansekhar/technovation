@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Technovation2.0</string>
+    <string name="title_activity_test">test</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_details">
+        <![CDATA[
+        <h1><b>TECHNOVATION:</b></h1>
+        <p>The Techno-Cultural fest of the department of CSEA,
+        IGIT, Sarang is back again with a bang,
+        to provide a platform to the young ubiquotous talents to give their
+        talents a new direction, and showcase their innovative and competitive skills.</p>
+        <h1><b>ABOUT CSEA DEPARTMENT:</b></h1>
+        <p>Recognized by the Computer Society Of India,due to its advanced technical laboratories,
+        cyber club, diversity of courses offered,
+        numerous achievements,and recruitment policy,it is one of the bst departments of IGIT emerged over
+        the years.</p>
+        <h1><b>ABOUT IGIT:</b></h1>
+        <p>IGIT was established directly by the Govt. of Odisha in the name of OCE
+        (Odisha College Of Engineering).
+        Prior to this, under the name of MPT(Modem Polytechnic),
+        it offered courses in Diploma. Later, MPT were merged and the management was transferred to
+        an autonomous society.</p>
+        ]]>
+    </string>
+</resources>

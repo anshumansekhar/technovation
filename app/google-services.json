@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "652033330512",
+    "firebase_url": "https://technovation20-866a0.firebaseio.com",
+    "project_id": "technovation20-866a0",
+    "storage_bucket": "technovation20-866a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652033330512:android:43bccbf79d913d24",
+        "android_client_info": {
+          "package_name": "com.technovation.technovation20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652033330512-g6l04ga9nrancpqq59vvvv19qf8ul5ii.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.technovation.technovation20",
+            "certificate_hash": "552ac4f667a36121869d308ca2d821ca2537f45d"
+          }
+        },
+        {
+          "client_id": "652033330512-ibll02anec63guafsr0kinv9fvk1uil3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMfpEWLkXKc7epYbw0Gm-JuLOat9wUX1o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652033330512-ibll02anec63guafsr0kinv9fvk1uil3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

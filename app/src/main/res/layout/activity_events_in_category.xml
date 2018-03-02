@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarInEventsCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ></android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+        <com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipeLayout"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <com.daprlabs.aaron.swipedeck.SwipeDeck
+                android:id="@+id/swipe_deck"
+                android:layout_width="match_parent"
+                android:layout_height="480dp"
+                android:padding="50dp"
+                swipedeck:max_visible="3"
+                swipedeck:card_spacing="15dp"
+                swipedeck:swipe_enabled="true" />
+        </com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout>
+</android.support.design.widget.CoordinatorLayout>
+
