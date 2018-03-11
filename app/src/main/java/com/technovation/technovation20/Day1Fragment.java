@@ -105,9 +105,13 @@ public class Day1Fragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent i=new Intent(getActivity(),EventDetailActivity.class);
-                    i.putExtra("EventType",day1Events.get(position).eventType);
-                    i.putExtra("EventName",day1Events.get(position).eventName);
-                    startActivity(i);
+                    if(day1Events.get(position).eventType.contains("gathering")){
+
+                    }else {
+                        i.putExtra("EventType", day1Events.get(position).eventType);
+                        i.putExtra("EventName", day1Events.get(position).eventName);
+                        startActivity(i);
+                    }
                 }
             });
 

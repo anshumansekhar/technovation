@@ -1,20 +1,16 @@
 package com.technovation.technovation20;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,31 +22,28 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    ConstraintLayout mainLayout;
+    DrawerLayout mainLayout;
     RecyclerView mainNavigationList;
     eventTypeAdapter eventTypeAdapter;
     ViewPager eventsImagePager;
+
+    boolean messageAvailable=false;
+
+    Menu notificationMenu;
 
     int currentPage,NUM_PAGES;
 
@@ -67,14 +60,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BroadcastReceiver receiver=new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.e("asgzd","onreciebe");
+                    changeDrawable();
+            }
+        };
+
+        registerReceiver(receiver,new IntentFilter("ChangingDrawable"));
+
+
         loadEventData();
 
         handler.removeCallbacks(r);
         handler.postDelayed(r,3000);
 
-        Log.e("token",FirebaseInstanceId.getInstance().getToken());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarVisit);
+        toolbar.setTitleTextAppearance(this,R.style.starWarsFont);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
+        toolbar.getBackground().setAlpha(0);
         setSupportActionBar(toolbar);
 
 
@@ -90,10 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.indicatorTab);
         tabLayout.setupWithViewPager(eventsImagePager, true);
 
-
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mainLayout=(ConstraintLayout)findViewById(R.id.mainLayout);
+        mainLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         mainNavigationList=(RecyclerView)findViewById(R.id.mainNavigationList);
         setBackground();
         setMainNavigationRecycler();
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_menu,menu);
+        notificationMenu=menu;
         return true;
     }
 
@@ -130,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.notification_menu:
+                messageAvailable=false;
+                onPrepareOptionsMenu(notificationMenu);
                 startActivity(new Intent(MainActivity.this,NotificationsActivity.class));
                 break;
             default:
@@ -147,64 +152,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void setBackground(){
         Log.e("dgs","SetBackground");
-        final ImageView view=new ImageView(this);
+        RequestOptions options=new RequestOptions();
+        options.centerCrop();
         Glide.with(this)
-                .load(R.drawable.ic_notifications_black_24dp)
-                .into(new Target<Drawable>() {
-                    @Override
-                    public void onLoadStarted(@Nullable Drawable placeholder) {
-
-                    }
-
-                    @Override
-                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
-
-                    }
-
+                .load(R.mipmap.splash_image)
+                .apply(options)
+                .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                        mainLayout.setBackground(resource);
-                    }
-
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-
-                    }
-
-                    @Override
-                    public void getSize(@NonNull SizeReadyCallback cb) {
-
-                    }
-
-                    @Override
-                    public void removeCallback(@NonNull SizeReadyCallback cb) {
-
-                    }
-
-                    @Override
-                    public void setRequest(@Nullable Request request) {
-
-                    }
-
-                    @Nullable
-                    @Override
-                    public Request getRequest() {
-                        return null;
-                    }
-
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onStop() {
-
-                    }
-
-                    @Override
-                    public void onDestroy() {
-
+                        getWindow().getDecorView().setBackground(resource);
+                        getWindow().getDecorView().getBackground().mutate().setAlpha(60);
                     }
                 });
 
@@ -219,16 +176,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.About:
                 startActivity(new Intent(MainActivity.this,AboutActivity.class));
                 break;
-            case R.id.sponsors:
-                startActivity(new Intent(MainActivity.this,SponsorsActivity.class));
-                break;
             case R.id.nav_share:
                 try {
                     Intent i = new Intent(Intent.ACTION_SEND);
                     i.setType("text/plain");
                     i.putExtra(Intent.EXTRA_SUBJECT, "Technovation 2.0");
-                    String sAux = "\nGet The Official app of Technovation 2.0 and stay Updated with live Event Notifications" +
-                            " and all your Event details at The Same Place\n\n";
+                    String sAux = "Get The Official app of Technovation 2.0 and stay Updated with live Event Notifications" +
+                            " and all your Event details at The Same Place\n";
                     sAux = sAux + "https://play.google.com/store/apps/details?id=com.technovation.technovation20 \n\n";
                     i.putExtra(Intent.EXTRA_TEXT, sAux);
                     startActivity(Intent.createChooser(i, "choose one"));
@@ -370,5 +324,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItem = menu.findItem(R.id.notification_menu);
+        if(messageAvailable) {
+            menuItem.setIcon(R.drawable.ic_notifications_active_black_24dp);
+        }else{
+            menuItem.setIcon(R.drawable.ic_notifications_black_24dp);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+    public  void changeDrawable(){
+            messageAvailable=true;
+            onPrepareOptionsMenu(notificationMenu);
+
+    }
 
 }

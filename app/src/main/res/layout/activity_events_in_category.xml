@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eventCatergoryLayout"
     xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarInEventsCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             ></android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -24,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/swipeLayout"
+            android:background="@android:color/transparent"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 

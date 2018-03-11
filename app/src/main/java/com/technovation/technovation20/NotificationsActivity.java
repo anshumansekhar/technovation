@@ -2,7 +2,9 @@ package com.technovation.technovation20;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +21,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -48,6 +54,8 @@ public class NotificationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+
+        setBackground();
 
         adminLayout=(LinearLayout)findViewById(R.id.adminLayout);
         adminLayout.setVisibility(View.INVISIBLE);
@@ -206,6 +214,24 @@ public class NotificationsActivity extends AppCompatActivity {
         public int getItemCount() {
             return notificationMessages.size();
         }
+    }
+
+    public void setBackground(){
+        Log.e("dgs","SetBackground");
+        RequestOptions options=new RequestOptions();
+        options.centerCrop();
+        Glide.with(this)
+                .load(R.mipmap.splash_image)
+                .apply(options)
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        getWindow().getDecorView().setBackground(resource);
+                        getWindow().getDecorView().getBackground().mutate().setAlpha(60);
+
+                    }
+                });
+
     }
 
 

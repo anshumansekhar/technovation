@@ -20,7 +20,7 @@ public class test extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarVisit);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Technovation 2.0");
 

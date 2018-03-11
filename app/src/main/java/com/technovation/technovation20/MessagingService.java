@@ -23,6 +23,7 @@ import java.util.Map;
 public class MessagingService extends FirebaseMessagingService {
 
     Map<String,String> notificationData=new HashMap();
+    public  static boolean changed=false;
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.e("Message", "From: " + remoteMessage.getFrom());
@@ -30,9 +31,10 @@ public class MessagingService extends FirebaseMessagingService {
         if(remoteMessage.getData().size() > 0){
             Log.e("Message", "Data payload: " + remoteMessage.getData());
             notificationData=remoteMessage.getData();
-
-
-
+            changed=true;
+            Intent i=new Intent("ChangingDrawable");
+            i.putExtra("Changed",true);
+            sendBroadcast(i);
         }
         if (remoteMessage.getNotification() != null) {
             Log.e("Message", "Message Notification Body: " + remoteMessage.getNotification().getBody());

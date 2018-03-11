@@ -2,10 +2,12 @@ package com.technovation.technovation20;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,11 +37,11 @@ public class eventTypeAdapter extends RecyclerView.Adapter<eventTypeHolder> {
     }
 
     @Override
-    public void onBindViewHolder(eventTypeHolder holder, int position) {
+    public void onBindViewHolder(final eventTypeHolder holder, int position) {
         holder.eventTypeName.setText(eventTypes.get(position));
         switch (position){
             case 0:
-                holder.eventTypeImageIcon.setImageResource(R.drawable.ic_005_coding);
+                holder.eventTypeImageIcon.setImageResource(R.mipmap.ic_coding_fore);
                 holder.eventTypeImageIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -50,8 +52,8 @@ public class eventTypeAdapter extends RecyclerView.Adapter<eventTypeHolder> {
                 }
             });
             break;
-            case 1:                    holder.eventTypeImageIcon.setImageResource(R.drawable.ic_001_darth_vader);
-
+            case 1:
+                holder.eventTypeImageIcon.setImageResource(R.mipmap.ic_darth_vader_fore);
                 holder.eventTypeImageIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -62,8 +64,8 @@ public class eventTypeAdapter extends RecyclerView.Adapter<eventTypeHolder> {
                 }
             });
                 break;
-            case 2:                    holder.eventTypeImageIcon.setImageResource(R.drawable.ic_006_dance);
-
+            case 2:
+                holder.eventTypeImageIcon.setImageResource(R.mipmap.ic_dance_fore);
                 holder.eventTypeImageIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -74,19 +76,26 @@ public class eventTypeAdapter extends RecyclerView.Adapter<eventTypeHolder> {
                 }
             });
                 break;
-            case 3:                    holder.eventTypeImageIcon.setImageResource(R.drawable.ic_007_spy);
-
+            case 3:
+                holder.eventTypeImageIcon.setImageResource(R.mipmap.ic_spy_fore);
                 holder.eventTypeImageIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i=new Intent(mainActivity,QRScannerActivity.class);
-                    mainActivity.startActivity(i);
+                    PackageManager pm = mainActivity.getPackageManager();
+                    Intent appStartIntent = pm.getLaunchIntentForPackage("com.technovation.iamsherlock");
+                    if (null != appStartIntent)
+                    {
+                        mainActivity.startActivity(appStartIntent);
+                    }else{
+                        Toast.makeText(mainActivity.getApplicationContext(),"Get the I am Sherlock app from Google Playstore",Toast.LENGTH_SHORT).show();
+                    }
+
 
                 }
             });
                 break;
             case 4:
-                holder.eventTypeImageIcon.setImageResource(R.drawable.ic_003_calendar);
+                holder.eventTypeImageIcon.setImageResource(R.mipmap.ic_calendar_fore);
 
                 holder.eventTypeImageIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,7 +107,7 @@ public class eventTypeAdapter extends RecyclerView.Adapter<eventTypeHolder> {
             });
                 break;
 
-            case 5: holder.eventTypeImageIcon.setImageResource(R.drawable.ic_002_visitor);
+            case 5: holder.eventTypeImageIcon.setImageResource(R.mipmap.ic_visitor_fore);
                 holder.eventTypeImageIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

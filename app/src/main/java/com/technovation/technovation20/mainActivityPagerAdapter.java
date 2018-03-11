@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
+import javax.microedition.khronos.opengles.GL;
+
 /**
  * Created by Anshuman-HP on 25-02-2018.
  */
@@ -17,6 +21,16 @@ public class mainActivityPagerAdapter extends PagerAdapter {
     Context mContext;
     LayoutInflater mLayoutInflater;
 
+    int[] mResources = {
+           R.mipmap.merchandise,
+            R.mipmap.special,
+            R.mipmap.special4,
+            R.mipmap.star,
+            R.mipmap.comedy,
+            R.mipmap.dj
+
+    };
+
     public mainActivityPagerAdapter(Context mContext, LayoutInflater mLayoutInflater) {
         this.mContext = mContext;
         this.mLayoutInflater = mLayoutInflater;
@@ -24,7 +38,7 @@ public class mainActivityPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return 8;
+        return mResources.length;
     }
 
     @Override
@@ -39,8 +53,9 @@ public class mainActivityPagerAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.image_card, container, false);
 
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
-
-
+        Glide.with(container)
+                .load(mResources[position])
+                .into(imageView);
         container.addView(itemView);
 
         return itemView;

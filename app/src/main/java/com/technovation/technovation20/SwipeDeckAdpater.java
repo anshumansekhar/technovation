@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,8 @@ public class SwipeDeckAdpater extends BaseAdapter {
         eventName=(TextView)v.findViewById(R.id.eventName);
 
         eventName.setText(events.get(i).eventName);
+        RequestOptions options=new RequestOptions();
+        options.override(50,100);
         Glide.with(viewGroup.getContext())
                 .load(events.get(i).eventImage)
                 .into(eventImage);

@@ -1,6 +1,6 @@
 package com.technovation.technovation20;
 
-import android.support.v7.widget.CardView;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +11,7 @@ import android.widget.TextView;
  */
 
 public class EventRecyclerHolder extends RecyclerView.ViewHolder {
-    CardView view;
+    ConstraintLayout view;
     ImageView eventImage;
     TextView eventName;
     TextView eventTiming;
@@ -19,7 +19,7 @@ public class EventRecyclerHolder extends RecyclerView.ViewHolder {
 
     public EventRecyclerHolder(View itemView) {
         super(itemView);
-        view=(CardView)itemView.findViewById(R.id.eventScheduleCard);
+        view=(ConstraintLayout) itemView.findViewById(R.id.eventScheduleCard);
         eventImage=(ImageView)itemView.findViewById(R.id.eventImage);
         eventName=(TextView)itemView.findViewById(R.id.EventName);
         eventTiming=(TextView)itemView.findViewById(R.id.EventTime);

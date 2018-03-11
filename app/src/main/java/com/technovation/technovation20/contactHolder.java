@@ -1,6 +1,6 @@
 package com.technovation.technovation20;
 
-import android.support.v7.widget.CardView;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -13,12 +13,12 @@ public class contactHolder extends RecyclerView.ViewHolder {
     TextView contactName;
     TextView contactDesignation;
     TextView contactNumber;
-    CardView contactCard;
+    ConstraintLayout contactCard;
     public contactHolder(View itemView) {
         super(itemView);
         contactName=(TextView)itemView.findViewById(R.id.contactName);
         contactDesignation=(TextView)itemView.findViewById(R.id.contactDesignation);
         contactNumber=(TextView)itemView.findViewById(R.id.phoneNumber);
-        contactCard=(CardView)itemView.findViewById(R.id.contactCard);
+        contactCard=(ConstraintLayout)itemView.findViewById(R.id.contactCard);
     }
 }
