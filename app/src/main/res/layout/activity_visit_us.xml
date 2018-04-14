@@ -3,13 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:background="@android:color/transparent"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
-
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarVisit"
                 android:background="@android:color/transparent"
@@ -22,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
         tools:context="com.technovation.technovation20.VisitUSActivity">
 
     <android.support.v7.widget.RecyclerView
@@ -60,6 +59,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:scrollbars="vertical"
+        android:scrollIndicators="right"
+        style="@style/scrollbar_shape_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

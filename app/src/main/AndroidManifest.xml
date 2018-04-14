@@ -2,12 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.technovation.technovation20">
 
-    <uses-feature
-        android:name="android.hardware.camera2"
-        android:required="false" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
         android:name=".TechnovationApp"
         android:logo="@mipmap/ic_launcher"
@@ -44,6 +38,7 @@
         </activity>
         <activity
             android:name=".QRScannerActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".NotificationsActivity"

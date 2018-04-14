@@ -46,12 +46,23 @@ public class contactAdapter extends RecyclerView.Adapter<contactHolder> {
                     }
                 });
                 break;
+            case 2:holder.contactName.setText("ChandraSekhar Pratap");
+                holder.contactDesignation.setText("(Assitant Chief Co-ordinator)");
+                holder.contactNumber.setText("9861908762");
+                holder.contactCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:9861908762"));
+                        holder.contactCard.getContext().startActivity(intent);
+                    }
+                });
+                break;
         }
-
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

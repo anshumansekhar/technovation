@@ -1,6 +1,7 @@
 package com.technovation.technovation20;
 
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,10 @@ public class EventRecyclerHolder extends RecyclerView.ViewHolder {
         eventName=(TextView)itemView.findViewById(R.id.EventName);
         eventTiming=(TextView)itemView.findViewById(R.id.EventTime);
         eventLocation=(TextView)itemView.findViewById(R.id.EventLocation);
+
+        eventLocation.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(itemView.getContext(),R.drawable.ic_location_on_black_24dp), null, null, null);
+        eventTiming.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(itemView.getContext(),R.drawable.ic_access_time_black_24dp), null, null, null);
+
 
     }
 }

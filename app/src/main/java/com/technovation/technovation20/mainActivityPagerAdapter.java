@@ -22,13 +22,14 @@ public class mainActivityPagerAdapter extends PagerAdapter {
     LayoutInflater mLayoutInflater;
 
     int[] mResources = {
+            R.mipmap.lazer_maze,
            R.mipmap.merchandise,
             R.mipmap.special,
             R.mipmap.special4,
             R.mipmap.star,
             R.mipmap.comedy,
-            R.mipmap.dj
-
+            R.mipmap.dj,
+            R.mipmap.alok
     };
 
     public mainActivityPagerAdapter(Context mContext, LayoutInflater mLayoutInflater) {

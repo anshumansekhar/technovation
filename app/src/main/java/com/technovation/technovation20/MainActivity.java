@@ -4,8 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -25,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -32,8 +36,10 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout mainLayout;
@@ -48,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int currentPage,NUM_PAGES;
 
     Handler handler=new Handler();
+    Bitmap shareImage=null;
+    String url="";
 
     public static HashMap<String,EventDetails> funEvents=new HashMap<>();
     public static HashMap<String,EventDetails> culturalEvents=new HashMap<>();
@@ -82,10 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
         toolbar.getBackground().setAlpha(0);
         setSupportActionBar(toolbar);
-
-
-
-
         eventsImagePager=(ViewPager)findViewById(R.id.mainPager);
         eventsImagePager.setAdapter(new mainActivityPagerAdapter(this, LayoutInflater.from(this)));
 
@@ -109,8 +113,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mainNavigationList=(RecyclerView)findViewById(R.id.mainNavigationList);
         setBackground();
         setMainNavigationRecycler();
-
-
     }
     @Override
     public void onBackPressed() {
@@ -154,14 +156,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.e("dgs","SetBackground");
         RequestOptions options=new RequestOptions();
         options.centerCrop();
+        options.override(getWindow().getDecorView().getWidth(),getWindow().getDecorView().getHeight());
         Glide.with(this)
-                .load(R.mipmap.splash_image)
+                .load(R.mipmap.splash_image_faded)
                 .apply(options)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                         getWindow().getDecorView().setBackground(resource);
-                        getWindow().getDecorView().getBackground().mutate().setAlpha(60);
                     }
                 });
 
@@ -176,22 +178,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.About:
                 startActivity(new Intent(MainActivity.this,AboutActivity.class));
                 break;
+            case R.id.scanQR:
+                startActivity(new Intent(MainActivity.this,QRScannerActivity.class));
+                break;
+
             case R.id.nav_share:
                 try {
-                    Intent i = new Intent(Intent.ACTION_SEND);
-                    i.setType("text/plain");
-                    i.putExtra(Intent.EXTRA_SUBJECT, "Technovation 2.0");
-                    String sAux = "Get The Official app of Technovation 2.0 and stay Updated with live Event Notifications" +
-                            " and all your Event details at The Same Place\n";
-                    sAux = sAux + "https://play.google.com/store/apps/details?id=com.technovation.technovation20 \n\n";
-                    i.putExtra(Intent.EXTRA_TEXT, sAux);
-                    startActivity(Intent.createChooser(i, "choose one"));
+                        Intent shareIntent = new Intent();
+                        shareIntent.setAction(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Technovation 2.0");
+                        String sAux = "Get The Official app of Technovation 2.0 and stay Updated with live Event Notifications" +
+                                " and all your Event details at The Same Place\n";
+                        sAux = sAux + "https://play.google.com/store/apps/details?id=com.technovation.technovation20 \n\n";
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, sAux);
+                        startActivity(Intent.createChooser(shareIntent, "Share App"));
                 } catch(Exception e) {
                     //e.toString();
                 }
                 break;
-
-
         }
 
 

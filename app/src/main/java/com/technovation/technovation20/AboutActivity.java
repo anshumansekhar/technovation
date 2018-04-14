@@ -34,15 +34,6 @@ public class AboutActivity extends AppCompatActivity {
         Glide.with(AboutActivity.this)
                 .load(R.mipmap.igit)
                 .into(image);
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=new Intent(AboutActivity.this,FullScreenImageActivity.class);
-                i.putExtra("imageURL",R.mipmap.instagram);
-                startActivity(i);
-            }
-        });
-
         aboutText=(TextView)findViewById(R.id.aboutText);
         aboutText.setText(Html.fromHtml(getString(R.string.about_details)));
 
@@ -56,14 +47,14 @@ public class AboutActivity extends AppCompatActivity {
         Log.e("dgs","SetBackground");
         RequestOptions options=new RequestOptions();
         options.centerCrop();
+        options.override(getWindow().getDecorView().getWidth(),getWindow().getDecorView().getHeight());
         Glide.with(this)
-                .load(R.mipmap.splash_image)
+                .load(R.mipmap.splash_image_faded)
                 .apply(options)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                         getWindow().getDecorView().setBackground(resource);
-                        getWindow().getDecorView().getBackground().mutate().setAlpha(60);
                     }
                 });
     }

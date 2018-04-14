@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:background="@android:color/black"
         android:text="Event Name"
         android:textColor="@android:color/white"

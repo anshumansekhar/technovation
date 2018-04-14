@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
@@ -51,13 +52,16 @@ public class EventDetailActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_event_detail);
         setBackground();
-
-
         callButton=(FloatingActionButton)findViewById(R.id.callButton);
         coordinatorName=(TextView)findViewById(R.id.eventCoordinatornamedetail);
         eventTiming=(TextView)findViewById(R.id.eventTimingDetail);
         eventDescp=(TextView)findViewById(R.id.eventDescriptionDetail);
         eventVenue=(TextView)findViewById(R.id.eventVenueDetail);
+
+        eventTiming.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(this,R.drawable.ic_access_time_black_24dp), null, null, null);
+        eventVenue.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(this,R.drawable.ic_location_on_black_24dp), null, null, null);
+        coordinatorName.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(this,R.drawable.ic_people_black_24dp), null, null, null);
+
         Intent intent=getIntent();
         eventType=intent.getStringExtra("EventType");
         eventName=intent.getStringExtra("EventName");
@@ -131,14 +135,14 @@ public class EventDetailActivity extends AppCompatActivity {
         Log.e("dgs","SetBackground");
         RequestOptions options=new RequestOptions();
         options.centerCrop();
+        options.override(getWindow().getDecorView().getWidth(),getWindow().getDecorView().getHeight());
         Glide.with(this)
-                .load(R.mipmap.splash_image)
+                .load(R.mipmap.splash_image_faded)
                 .apply(options)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                         getWindow().getDecorView().setBackground(resource);
-                        getWindow().getDecorView().getBackground().mutate().setAlpha(60);
 
                     }
                 });

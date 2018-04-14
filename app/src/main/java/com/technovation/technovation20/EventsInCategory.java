@@ -91,6 +91,7 @@ public class EventsInCategory extends AppCompatActivity {
         Log.e("dgs","SetBackground");
         RequestOptions options=new RequestOptions();
         options.centerCrop();
+        options.override(getWindow().getDecorView().getWidth(),getWindow().getDecorView().getHeight());
         Glide.with(this)
                 .load(R.mipmap.splash_image)
                 .apply(options)
